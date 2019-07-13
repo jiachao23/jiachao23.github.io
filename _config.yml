@@ -1,3 +1,4 @@
-name:Jcohy
+name: Jcohy
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
+highlighter: rouge
