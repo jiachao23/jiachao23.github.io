@@ -8,7 +8,7 @@ title: Jcohy
 subtitle: ""
 description: "jcohy的个人博客"
 keywords: jcohy, Jiac
-timezone: Xian/ShannXi
+timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
 
@@ -19,7 +19,7 @@ author: Jcohy
 organization:
 organization_url:
 github_username: mzlogin
-location: ShannXi, China
+location: ShanXi, China
 email: jia_chao23@126.com
 
 # ---------------- #
@@ -81,7 +81,7 @@ collections:
         output: true
         permalink: /wiki/:path/
 
-repository: mzlogin/mzlogin.github.io
+repository: jiachao23/jiachao23.github.io
 
 # ---------------- #
 #      Comments    #
