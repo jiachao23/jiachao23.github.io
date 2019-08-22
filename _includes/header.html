@@ -69,6 +69,14 @@
     <script src="{{ site.url }}/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ site.url }}/assets/js/jquery-ui.js"></script>
     <script src="{{ site.url }}/assets/js/main.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146222994-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-146222994-1');
+    </script>
 </head>
 <body class="{{ page.class }}" data-mz="{{ page.class }}">
     <header class="site-header">
