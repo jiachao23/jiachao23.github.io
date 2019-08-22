@@ -129,3 +129,14 @@ simple_jekyll_search:
 # ---------------- #
 google:
     analytics_id: UA-146222994-1
+baidu:
+    analytice_id: dfa1a64ad5154fcdb78635aa85d31537
+
+
+# ---------------- #
+#    浏览次数      #
+# ---------------- #
+leancloud:
+  enable: true
+  app_id: yj5Ll2BfuUYNMj1lRK504lU8-gzGzoHsz
+  app_key: clArKQGDjX5Lax8m3mlKpVC1
