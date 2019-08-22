@@ -1,23 +1,23 @@
 ---
 layout: page
 title: About
-description: 打码改变世界
+description: About Me
 keywords: Jcohy, Jiac
 comments: true
 menu: 关于
 permalink: /about/
 ---
 
-我是马壮，码而生，码而立。
+越是错综复杂的问题。
 
-仰慕「优雅编码的艺术」。
+就越要根据简单的原理和朴素的思想进行判断和行动。
 
-坚信熟能生巧，努力改变人生。
+我想这是拨开云雾见南山，直接洞悉事物本质和解决问题的最佳方法。
 
 ## 联系
 
 {% for website in site.data.social %}
-* {{ website.sitename }}：[@{{ website.name }}]({{ website.url }})
+* {{ website.sitename }}：[{{ website.name }}]({{ website.url }})
 {% endfor %}
 
 ## Skill Keywords
