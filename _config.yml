@@ -1,13 +1,13 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-baseurl:
-url: https://jcohy.com
+baseurl: /
+#url: http://www.jcohy.org
 date_format: "ordinal"
 title: Jcohy
-subtitle: ""
+subtitle: "码亦有码"
 description: "jcohy的个人博客"
-keywords: jcohy, Jiac
+keywords: jcohy, Jcohy
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
@@ -15,11 +15,11 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: Jcohy
+author: jiac
 organization:
 organization_url:
-github_username: mzlogin
-location: ShanXi, China
+github_username: jiachao23
+location: ShannXi, China
 email: jia_chao23@126.com
 
 # ---------------- #
@@ -34,9 +34,13 @@ navs:
     href: /categories/
     label: 分类
 
-#   -
-#     href: /archives/
-#     label: 归档
+  -
+    href: /archives/
+    label: 归档
+
+  -
+    href: /open-source/
+    label: 开源
 
   -
     href: /wiki/
@@ -67,7 +71,7 @@ lsi: false
 quiet: false
 excerpt_separator: "\n\n"
 permalink: /:year/:month/:day/:title/
-gems:
+plugins:
     - jekyll-github-metadata
     - rouge
 #     - jekyll-html-pipeline
@@ -99,13 +103,13 @@ gitment:
     repo: blog-comments
     oauth:
         client_id: 927f8f186d0df5eb5dd5
-        client_secret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+        client_secret: ec70cb3bda660edaf4ca53626b0d671e8eca352b
 # https://github.com/gitalk/gitalk#install
 gitalk:
     owner: jiachao23
     repo: blog-comments
     clientID: 927f8f186d0df5eb5dd5
-    clientSecret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+    clientSecret: ec70cb3bda660edaf4ca53626b0d671e8eca352b
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : false
 
@@ -121,5 +125,5 @@ simple_jekyll_search:
 # ---------------- #
 #    Analytics     #
 # ---------------- #
-google:
-    analytics_id: UA-80669434-1
+#google:
+#    analytics_id: UA-80669434-1
