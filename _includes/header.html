@@ -84,6 +84,9 @@
                 <a href="{{ site.url }}{{ nav.href }}" class="{% if page.menu == nav.label %} selected {% endif %} site-header-nav-item" target="{{ nav.target | default: _self }}" title="{{ nav.label }}">{{ nav.label }}</a>
                 {% endfor %}
             </nav>
+            {% if jekyll.environment == 'production' and site.google_analytics %}
+            {% include google-analytics.html %}
+            {% endif %}
         </div>
     </header>
     <!-- / header -->
