@@ -40,11 +40,11 @@ navs:
 
   -
     href: /open-source/
-    label: 开源
+    label: GitHub
 
   -
     href: /wiki/
-    label: 维基
+    label: WiKi
 
   -
     href: /links/
