@@ -2,12 +2,12 @@
 #   Main Configs   #
 # ---------------- #
 baseurl: /
-#url: http://www.jcohy.org
+#url: http://www.jcohy.com
 date_format: "ordinal"
 title: Jcohy
-subtitle: "码亦有码"
+subtitle: "越是错综复杂的问题。就越要根据简单的原理和朴素的思想进行判断和行动。"
 description: "jcohy的个人博客"
-keywords: jcohy, Jcohy
+keywords: jcohy, Jcohy,jiac，jiachao23，study，source
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
@@ -15,7 +15,7 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: jiac
+author: jcohy
 organization:
 organization_url:
 github_username: jiachao23
@@ -53,7 +53,9 @@ navs:
   -
     href: /about/
     label: 关于
-
+  -
+    href: /resource/
+    label: 资源
 # ---------------- #
 #       RSS        #
 # ---------------- #
