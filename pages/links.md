@@ -12,6 +12,6 @@ permalink: /links/
 
 {% for link in site.data.links %}
   {% if link.src == 'www' %}
-* [{{ link.name }}]({{ link.url }})
+* [{{ link.name }}:{{ link.description}}]({{ link.url }})
   {% endif %}
 {% endfor %}
