@@ -1,6 +1,7 @@
 ---
 title: Linux下常用软件安装
-keywords: linux, java, install
+categories: [linux，software]
+keywords: linux, 软件, 安装
 description: Linux下常用软件安装
 ---
 
@@ -30,7 +31,6 @@ description: Linux下常用软件安装
 > * [Confluence](#Confluence)
 > * [常用软件安装脚本](#useage)
 
-<p id ="软硬件环境">
 
 ## 软硬件环境
 
@@ -50,8 +50,6 @@ description: Linux下常用软件安装
 | docker   | release                                  |
 | jenkins  | release                                  |
 | gcc      | gcc-8.3.0.tar.gz                         |
-
-<p id ="jdk">
 
 
 ## JDK
@@ -92,8 +90,6 @@ source /etc/profile
 java -version
 ```
 
-<p id ="tomcat">
-
 ## Tomcat
 
 
@@ -133,7 +129,6 @@ netstat -anpt | grep 2465
 
  <http://192.168.11.231:8080/>
 
-<p id ="mysql">
 
 ## mysql
 
@@ -283,8 +278,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 flush privileges;
 ```
 
-<p id ="redis">
-
 ## Redis
 
 
@@ -344,8 +337,6 @@ mkdir -p /docker/redis/conf /docker/redis/data
 docker run --restart=always --privileged=true -p 6379:6379 -v /docker/redis/data:/data -v /docker/redis/conf/redis.conf:/etc/redis/redis.conf --name myredis -d redis redis-server --appendonly yes
 
 ```
-
-<p id ="nginx">
 
 ## nginx
 
@@ -477,8 +468,6 @@ https://software.jcohy.com/linux/nginx-1.6.2.build.tar.gz
 tar -zxvf nginx-1.6.2.build.tar.gz  -C /usr/local
 ```
 
-<p id ="rabbit">
-
 ## RabbitMq
 
 
@@ -561,16 +550,12 @@ rabbitmqctl list_user_permissions username
   docker run --restart=always -d -p 5672:5672 -p 15672:15672 --name myrabbitmq 3f92e6354d11
 ```
 
-<p id ="git">
-
 ## git
 
 ```shell
 yum -y install git-core
 git --version
 ```
-
-<p id ="gitlab">
 
 ## gitlab
 
@@ -744,8 +729,6 @@ Notify.test_email('jia_chao23@126.com', 'Message Subject', 'Message Body').deliv
 ```
 
 
-<p id ="node">
-
 ## node
 
 ### 下载地址
@@ -877,8 +860,6 @@ ln -s /usr/local/node/node-v0.10.16-linux-x64/bin/node /usr/local/bin/node
 npm -v
 ```
 
-<p id ="yapi">
-
 ## yapi
 
 1. 确保 node 版本=> 7.6,请运行 node -v 查看版本号
@@ -892,8 +873,6 @@ npm install -g yapi-cli --registry https://registry.npm.taobao.org
 yapi server 
 ```
 
-<p id ="mongodb">
-
 ## mongodb
 
 
@@ -902,8 +881,6 @@ yapi server
 wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
 
 ```
-
-<p id ="docker">
 
 ## docker
 
@@ -923,8 +900,6 @@ vim  /usr/lib/sysctl.d/00-system.conf
 net.ipv4.ip_forward=1
 systemctl restart network && systemctl restart docker
 ```
-
-<p id ="jenkins">
 
 ## Jenkins
 
@@ -948,8 +923,6 @@ docker run \
 -v /opt/jenkins/run/docker.sock:/var/run/docker.sock  \
 jenkinsci/blueocean 
 ```
-
-<p id ="安装高版本gcc">
 
 ## 安装高版本gcc
 
@@ -1030,8 +1003,6 @@ strings /usr/lib64/libstdc++.so.6|grep GLIBC
 yum install -y glibc-headers
 yum install -y gcc-c++ 
 ```
-
-<p id ="LDAP">
 
 ## LDAP
 
@@ -1238,8 +1209,6 @@ ou: Group
 
 [rootpwd.ldif](https://github.com/jiachao23/jcohy-study-sample/tree/master/jcohy-study-linux/bash/rootpwd.ldif)
 
-<p id ="Confluence">
-
 ## Confluence
 
 参考文档：
@@ -1360,8 +1329,6 @@ mysql设置问题：
 第三步、进入confluence.home配置的文件夹，打开这个文件夹看到 有一个confluence.cfg.xml文件，打开这个文件，发现配置的数据库连接池一类的东西，真正的算是找到了，修改hibernate.connection.url的value为新的数据库地址 重新启动服务；
 
  /var/atlassian/application-data/confluence下confluence.cfg.xml文件：
-
-<p id ="useage">
 
 ## 常用软件安装脚本
 
