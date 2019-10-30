@@ -1,23 +1,23 @@
 ---
-layout: post
 title: Linux下常用软件安装
-categories: [article，linux]
-description: 相关文章的导航链接
-keywords: article, linux，jdk，tomcat,软件
+keywords: linux, java, install
+description: Linux下常用软件安装
 ---
 
-#### 作者网页：[www.jcohy.com](http://www.jcohy.com)  	
-> #### PS:待开发中。。。。
 
 #  Linux下常用软件安装
-> #### PS:待开发中。。。。
-> #### 作者网页：jiac
+> ### PS:待开发中。。。。
+> ### 作者：jiac
 
+## 安装目录
+
+> * [软硬件环境](#软硬件环境)
 > * [JDK](#jdk)
 > * [Tomcat](#tomcat)
 > * [Mysql](#mysql)
 > * [Redis](#redis)
 > * [Nginx](#nginx)
+> * [RabbitMq](#RabbitMq)
 > * [git](#git)
 > * [gitlab](#gitlab)
 > * [node](#node)
@@ -25,41 +25,83 @@ keywords: article, linux，jdk，tomcat,软件
 > * [mongodb](#mongodb)
 > * [docker](#docker)
 > * [Jenkins](#jenkins)
+> * [安装高版本gcc](#安装高版本gcc)
+> * [LDAP](#LDAP)
+> * [Confluence](#Confluence)
+> * [常用软件安装脚本](#useage)
 
+<p id ="软硬件环境">
+
+## 软硬件环境
+
+| 软件     | 相关软件包或版本                         |
+| -------- | ---------------------------------------- |
+| 操作系统 | CentOS Linux release 7.6.1810            |
+| jdk      | jdk-8u221-linux-x64.tar.gz               |
+| tomcat   | apache-tomcat-7.0.94.tar.gz              |
+| mysql    | mysql-8.0.16-2.el7.x86_64.rpm-bundle.tar |
+| redis    | redis-5.0.5.tar.gz                       |
+| nginx    | nginx-1.6.2.build.tar.gz                 |
+| git      | release                                  |
+| gitlab   | release                                  |
+| node     | node-v10.16.0.tar.gz                     |
+| yapi     | release                                  |
+| mongodb  | release                                  |
+| docker   | release                                  |
+| jenkins  | release                                  |
+| gcc      | gcc-8.3.0.tar.gz                         |
+
+<p id ="jdk">
 
 
 ## JDK
 
-1、用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **jdk-8u144-linux-x64.tar.gz**
 
-3、解压jdk到/usr/local目录
+### 下载地址
+
+ http://software.jcohy.com/linux/jdk-8u221-linux-x64.tar.gz 
+
+### 常规安装
+
+1、用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **jdk-8u221-linux-x64.tar.gz**
+
+2、解压jdk到/usr/local目录
 
 ```shell
-tar -zxvf jdk-8u144-linux-x64.tar.gz -C /usr/local/
+tar -zxvf jdk-8u221-linux-x64.tar.gz -C /usr/local/
 ```
 
-4、设置环境变量，在/etc/profile文件最后追加相关内容
+3、设置环境变量，在/etc/profile文件最后追加相关内容
 
 ```shell
 vi /etc/profile
 
-export JAVA_HOME=/usr/local/jdk1.8.0_144
+export JAVA_HOME=/usr/local/jdk1.8.0_221
 export PATH=$PATH:$JAVA_HOME/bin
 ```
 
-5、刷新环境变量
+4、刷新环境变量
 
 ```shell
 source /etc/profile
 ```
 
-6、测试java命令是否可用
+5、测试java命令是否可用
 
 ```shell
 java -version
 ```
 
+<p id ="tomcat">
+
 ## Tomcat
+
+
+### 下载地址
+
+ http://software.jcohy.com/linux/apache-tomcat-7.0.94.tar.gz
+
+### 常规安装
 
 1、用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **apache-tomcat-7.0.94.tar.gz**
 
@@ -91,7 +133,16 @@ netstat -anpt | grep 2465
 
  <http://192.168.11.231:8080/>
 
-## Mysql
+<p id ="mysql">
+
+## mysql
+
+
+### 下载地址
+
+https://pan.baidu.com/s/1iP5QDXSYHQ5q61cBFQvs-A
+
+### 常规安装
 
 1. 用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **mysql-8.0.16-2.el7.x86_64.rpm-bundle.tar**
 
@@ -158,7 +209,7 @@ mysql -uroot -p
 9、登录上去后，使用下列语句更新密码
 
 ```shell
- ALTER USER 'root'@'localhost' IDENTIFIED BY 'Xuanwuai@123';
+ ALTER USER 'root'@'localhost' IDENTIFIED BY 'jia_chao23@126.com';
 ```
 
  mysql 5.8 修改密码加密方式，改成mysql_native_password,然后修改密码
@@ -168,10 +219,10 @@ mysql -uroot -p
  select host,user,plugin  from mysql.user;
  
 
- ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Xuanwuai@123';
- ALTER USER 'root'@'%' IDENTIFIED BY 'Xuanwuai@123';
- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Xuanwuai@123';
- ALTER USER 'root'@'localhost' IDENTIFIED BY 'Xuanwuai@123';
+ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'jia_chao23@126.com';
+ ALTER USER 'root'@'%' IDENTIFIED BY 'jia_chao23@126.com';
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'jia_chao23@126.com';
+ ALTER USER 'root'@'localhost' IDENTIFIED BY 'jia_chao23@126.com';
  flush privileges;
 
 ```
@@ -202,13 +253,13 @@ select @@validate_password_length;
 set global validate_password_length=1;
 ```
 
-11.添加远程登录用户
+11、添加远程登录用户
 
 ```shell
 GRANT ALL PRIVILEGES ON *.* TO 'jiac'@'%' IDENTIFIED BY 'jiac0917!' WITH GRANT OPTION;
 ```
 
-12.配置默认编码为utf8
+12、配置默认编码为utf8
 
 ```shell
 #修改/etc/my.cnf配置文件，在[mysqld]下添加编码配置，如下所示：
@@ -216,7 +267,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'jiac'@'%' IDENTIFIED BY 'jiac0917!' WITH GRANT O
 character_set_server=utf8
 init_connect='SET NAMES utf8'
 ```
-13.开启端口访问
+13、开启端口访问
 
 ```shell
 firewall-cmd --permanent --zone=public --add-port=3306/tcp
@@ -224,13 +275,26 @@ firewall-cmd --permanent --zone=public --add-port=3306/udp
 firewall-cmd --reload
 firewall-cmd --list-ports  
 ```
-14.开启远程登录
+14、开启远程登录
 
 ```shell
-CREATE USER 'root'@'%' IDENTIFIED BY 'Xuanwuai@123';
+CREATE USER 'root'@'%' IDENTIFIED BY 'jiac0917!';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 flush privileges;
 ```
+
+<p id ="redis">
+
+## Redis
+
+
+### 下载地址
+
+https://pan.baidu.com/s/1iP5QDXSYHQ5q61cBFQvs-A
+
+https://github.com/MSOpenTech/redis/releases
+
+### 常规安装
 
 1、[到官网](https://github.com/MSOpenTech/redis/releases)下载redis安装包
 
@@ -270,17 +334,28 @@ redis> get foo
 "bar"
 ```
 
-5、使用docker安装[redis](http://www.runoob.com/docker/docker-install-redis.html)
+### docker安装
+
+1、使用docker安装[redis](http://www.runoob.com/docker/docker-install-redis.html)
 
 ```shell
 docker pull redis
 mkdir -p /docker/redis/conf /docker/redis/data
 docker run --restart=always --privileged=true -p 6379:6379 -v /docker/redis/data:/data -v /docker/redis/conf/redis.conf:/etc/redis/redis.conf --name myredis -d redis redis-server --appendonly yes
+
 ```
+
+<p id ="nginx">
 
 ## nginx
 
+### 下载地址：
+
 http://nginx.org/en/linux_packages.html#RHEL-CentOS
+
+http://software.jcohy.com/linux/nginx-1.6.2.tar.gz 
+
+### 常规安装
 
 1、安装编译工具及库文件
 
@@ -290,7 +365,7 @@ yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel
 
 2、首先要安装 PCRE
 
-- 1、下载 PCRE 安装包，下载地址： <http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz>
+- 下载 PCRE 安装包，下载地址： <http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz>
 
 ```shell
 [root@bogon src]# cd /opt/software
@@ -370,17 +445,7 @@ yum -y install make zlib zlib-devel gcc-c++ libtool  openssl openssl-devel
 /usr/local/webserver/nginx/sbin/nginx -s stop              # 停止 Nginx
 ```
 
-6、使用docker安装[nginx](http://www.runoob.com/docker/docker-install-nginx.html)
-
-```shell
-docker pull nginx
-
-mkdir -p /docker/nginx/www /docker/nginx/logs /docker/nginx/conf
-
-docker run -d -p 80:80 --name nginx -v /docker/nginx/www:/usr/share/nginx/html -v /docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /docker/nginx/logs:/var/log/nginx nginx
-```
-
-8、错误处理
+6、错误处理
 
 ```
 src/core/ngx_murmurhash.c: In function ‘ngx_murmur_hash2’:
@@ -390,9 +455,36 @@ src/core/ngx_murmurhash.c: In function ‘ngx_murmur_hash2’:
 再重新make
 ```
 
-9、安装版安装
+### docker安装
+
+1、使用docker安装[nginx](http://www.runoob.com/docker/docker-install-nginx.html)
+
+```shell
+docker pull nginx
+
+mkdir -p /docker/nginx/www /docker/nginx/logs /docker/nginx/conf
+
+docker run -d -p 80:80 --name nginx -v /docker/nginx/www:/usr/share/nginx/html -v /docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /docker/nginx/logs:/var/log/nginx nginx
+```
+
+### 使用编译后软件包安装
+
+这里本人将nginx软件进行了编译。使用编译后的文件直接解压使用即可。
+
+https://software.jcohy.com/linux/nginx-1.6.2.build.tar.gz 
+
+```
+tar -zxvf nginx-1.6.2.build.tar.gz  -C /usr/local
+```
+
+<p id ="rabbit">
 
 ## RabbitMq
+
+
+### 下载地址
+
+### 常规安装
 
 1、由于RabbitMQ依赖Erlang， 所以需要先安装Erlang
 
@@ -457,26 +549,36 @@ rabbitmqctl set_permissions -p / username ".*" ".*" ".*"
 rabbitmqctl list_user_permissions username
 
   ```
-  7、使用docker构建
- * 在docker官网查找docker镜像，https://hub.docker.com/
+### docker安装
 
-* 拉取镜像,我们选择带有“mangement”的版本（包含web管理页面）
+	1、在docker官网查找docker镜像，https://hub.docker.com/
+	
+	2、拉取镜像,我们选择带有“mangement”的版本（包含web管理页面）
+
 ```shell
   docker pull rabbitmq:3.7.16-management
 
   docker run --restart=always -d -p 5672:5672 -p 15672:15672 --name myrabbitmq 3f92e6354d11
 ```
 
+<p id ="git">
+
 ## git
 
 ```shell
 yum -y install git-core
-
 git --version
 ```
+
+<p id ="gitlab">
+
 ## gitlab
 
+### 下载地址 
+
 https://about.gitlab.com/install/#centos-7
+
+### 常规安装
 
 1、安装依赖
 
@@ -544,7 +646,7 @@ sudo gitlab-ctl reconfigure 配置执行
 ```
 
 
-##### Docker安装中文版
+### Docker安装中文版
 
 https://docs.gitlab.com/omnibus/docker/
 
@@ -613,12 +715,12 @@ docker logs -f gitlab
 gitlab_rails['smtp_enable'] = true
 gitlab_rails['smtp_address'] = "smtp.exmail.qq.com"
 gitlab_rails['smtp_port'] = 465
-gitlab_rails['smtp_user_name'] = "jiachao@xuanwuai.com"
+gitlab_rails['smtp_user_name'] = "jia_chao23@126.com"
 gitlab_rails['smtp_password'] = "Jia@1203"
 gitlab_rails['smtp_authentication'] = "login"
 gitlab_rails['smtp_enable_starttls_auto'] = true
 gitlab_rails['smtp_tls'] = true
-gitlab_rails['gitlab_email_from'] = 'jiachao@xuanwuai.com'
+gitlab_rails['gitlab_email_from'] = 'jia_chao23@126.com'
 gitlab_rails['smtp_domain'] = "exmail.qq.com"
 
 ```
@@ -631,7 +733,6 @@ docker restart gitlab
 docker stop gitlab
 docker rm gitlab
 
-
 //内部操作
 //重新配置GitLab以使更改生效
 gitlab-ctl reconfigure
@@ -641,9 +742,19 @@ gitlab-rake gitlab:incoming_email:check
 gitlab-rails console
 Notify.test_email('jia_chao23@126.com', 'Message Subject', 'Message Body').deliver_now
 ```
+
+
+<p id ="node">
+
 ## node
 
-#### 1、编译安装
+### 下载地址
+
+http://software.jcohy.com/linux/node-v10.16.0.tar.gz 
+
+http://nodejs.org/dist/v10.16.0/node-v10.16.0.tar.gz 
+
+### 常规安装
 
 1、下载并解压
 
@@ -747,7 +858,7 @@ rm -rf libstdc++.so.6
 ln -s libstdc++.so.6.0.21 libstdc++.so.6
 ```
 
-#### 2、淘宝镜像安装
+### 2、淘宝镜像安装
 
 ```shell
 .cd  /usr/loacl/node/  
@@ -766,6 +877,8 @@ ln -s /usr/local/node/node-v0.10.16-linux-x64/bin/node /usr/local/bin/node
 npm -v
 ```
 
+<p id ="yapi">
+
 ## yapi
 
 1. 确保 node 版本=> 7.6,请运行 node -v 查看版本号
@@ -779,11 +892,18 @@ npm install -g yapi-cli --registry https://registry.npm.taobao.org
 yapi server 
 ```
 
+<p id ="mongodb">
+
 ## mongodb
+
+
 
 ```
 wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz
+
 ```
+
+<p id ="docker">
 
 ## docker
 
@@ -803,6 +923,8 @@ vim  /usr/lib/sysctl.d/00-system.conf
 net.ipv4.ip_forward=1
 systemctl restart network && systemctl restart docker
 ```
+
+<p id ="jenkins">
 
 ## Jenkins
 
@@ -827,11 +949,15 @@ docker run \
 jenkinsci/blueocean 
 ```
 
-## 安装高版本Gcc
+<p id ="安装高版本gcc">
+
+## 安装高版本gcc
 
 1、下载高版本gcc，这里使用的是8.3.0
 
 http://ftp.gnu.org/gnu/gcc/
+
+编译后的gcc包，可解压后可直接从第5步开始：https://pan.baidu.com/s/159KLVjbaYALx6lrgibU-SQ
 
 2、解压缩
 
@@ -904,6 +1030,8 @@ strings /usr/lib64/libstdc++.so.6|grep GLIBC
 yum install -y glibc-headers
 yum install -y gcc-c++ 
 ```
+
+<p id ="LDAP">
 
 ## LDAP
 
@@ -983,17 +1111,17 @@ dn: olcDatabase={1}monitor,cn=config
 changetype: modify
 replace: olcAccess
 olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
-  read by dn.base="cn=Manager,dc=xuanwuai,dc=cn" read by * none
+  read by dn.base="cn=Manager,dc=jiac,dc=cn" read by * none
 
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
-olcSuffix: dc=xuanwuai,dc=cn
+olcSuffix: dc=jiac,dc=cn
 
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcRootDN
-olcRootDN: cn=Manager,dc=xuanwuai,dc=cn
+olcRootDN: cn=Manager,dc=jiac,dc=cn
 
 
 dn: olcDatabase={2}hdb,cn=config
@@ -1006,9 +1134,9 @@ dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 add: olcAccess
 olcAccess: {0}to attrs=userPassword,shadowLastChange by
-  dn="cn=Manager,dc=xuanwuai,dc=cn" write by anonymous auth by self write by * none
+  dn="cn=Manager,dc=jiac,dc=cn" write by anonymous auth by self write by * none
 olcAccess: {1}to dn.base="" by * read
-olcAccess: {2}to * by dn="cn=Manager,dc=xuanwuai,dc=cn" write by * read
+olcAccess: {2}to * by dn="cn=Manager,dc=jiac,dc=cn" write by * read
 ```
 
 - `olcAccess`即access，该key用于指定目录的ACL即谁有什么权限可以存取什么
@@ -1036,68 +1164,68 @@ modifying entry "olcDatabase={2}hdb,cn=config"
 6、**添加基本目录**
 
 ```shell
-dn: dc=xuanwuai,dc=cn
+dn: dc=jiac,dc=cn
 objectClass: top
 objectClass: dcObject
 objectclass: organization
-o: xuanwuai cn
-dc: xuanwuai
+o: jiac cn
+dc: jiac
 
-dn: cn=Manager,dc=xuanwuai,dc=cn
+dn: cn=Manager,dc=jiac,dc=cn
 objectClass: organizationalRole
 cn: Manager
 description: Directory Manager
 
-dn: ou=People,dc=xuanwuai,dc=cn
+dn: ou=People,dc=jiac,dc=cn
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Group,dc=xuanwuai,dc=cn
+dn: ou=Group,dc=jiac,dc=cn
 objectClass: organizationalUnit
 ou: Group
 ```
 
 - 注意替换上面文件内容中dn为具体的域信息
 - 理解dn,cn,dc
-  - DC即Domain Component，LDAP目录类似文件系统目录`dc=xuanwuai,dc=cn`相当于`/cn/xuanwuai`
-  - CN即Common Name，CN有可能代表一个用户名，例如`cn=Manager,dc=xuanwuai,dc=cn`表示在`/cn/xuanwuai`域下的管理员用户Manager
-  - OU即Organizational Unit，例如`ou=People,dc=xuanwuai,dc=cn`表示在`/cn/xuanwuai`域下的一个组织单元`People`
+  - DC即Domain Component，LDAP目录类似文件系统目录`dc=jiac,dc=cn`相当于`/cn/jiac`
+  - CN即Common Name，CN有可能代表一个用户名，例如`cn=Manager,dc=jiac,dc=cn`表示在`/cn/jiac`域下的管理员用户Manager
+  - OU即Organizational Unit，例如`ou=People,dc=jiac,dc=cn`表示在`/cn/jiac`域下的一个组织单元`People`
 
 ```shell
 #写入:
-ldapadd -x -D cn=Manager,dc=xuanwuai,dc=cn -W -f basedomain.ldif
+ldapadd -x -D cn=Manager,dc=jiac,dc=cn -W -f basedomain.ldif
 Enter LDAP Password:
-adding new entry "dc=xuanwuai,dc=cn"
+adding new entry "dc=jiac,dc=cn"
 
-adding new entry "cn=Manager,dc=xuanwuai,dc=cn"
+adding new entry "cn=Manager,dc=jiac,dc=cn"
 
-adding new entry "ou=People,dc=xuanwuai,dc=cn"
+adding new entry "ou=People,dc=jiac,dc=cn"
 
-adding new entry "ou=Group,dc=xuanwuai,dc=cn"
+adding new entry "ou=Group,dc=jiac,dc=cn"
 ```
 
 7、测试
 
 ```shell
-ldapsearch -LLL -W -x -D "cn=Manager,dc=xuanwuai,dc=cn" -H ldap://localhost -b "dc=xuanwuai,dc=cn"
+ldapsearch -LLL -W -x -D "cn=Manager,dc=jiac,dc=cn" -H ldap://localhost -b "dc=jiac,dc=cn"
 Enter LDAP Password:
-dn: dc=xuanwuai,dc=cn
+dn: dc=jiac,dc=cn
 objectClass: top
 objectClass: dcObject
 objectClass: organization
-o: xuanwuai cn
-dc: xuanwuai
+o: jiac cn
+dc: jiac
 
-dn: cn=Manager,dc=xuanwuai,dc=cn
+dn: cn=Manager,dc=jiac,dc=cn
 objectClass: organizationalRole
 cn: Manager
 description: Directory Manager
 
-dn: ou=People,dc=xuanwuai,dc=cn
+dn: ou=People,dc=jiac,dc=cn
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Group,dc=xuanwuai,dc=cn
+dn: ou=Group,dc=jiac,dc=cn
 objectClass: organizationalUnit
 ou: Group
 ```
@@ -1109,6 +1237,8 @@ ou: Group
 [domain.ldif](https://github.com/jiachao23/jcohy-study-sample/tree/master/jcohy-study-linux/bash/domain.ldif)
 
 [rootpwd.ldif](https://github.com/jiachao23/jcohy-study-sample/tree/master/jcohy-study-linux/bash/rootpwd.ldif)
+
+<p id ="Confluence">
 
 ## Confluence
 
@@ -1133,7 +1263,7 @@ wget https://downloads.atlassian.com/software/confluence/downloads/atlassian-con
 
 2、下载破解器
 
-https://files.cnblogs.com/files/Javame/confluence%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7.zip
+http://software.jcohy.com/windows/confluence%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7.zip 
 
 3、安装confluence
 
@@ -1147,7 +1277,7 @@ chmod +x atlassian-confluence-6.12.1-x64.bin
 
 下载破解和mysql驱动
 
-https://files.cnblogs.com/files/Javame/confluence%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7.rar
+https://software.jcohy.com/windows/confluence%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7.zip 
 
 - 1、备份jar包
 
@@ -1230,3 +1360,322 @@ mysql设置问题：
 第三步、进入confluence.home配置的文件夹，打开这个文件夹看到 有一个confluence.cfg.xml文件，打开这个文件，发现配置的数据库连接池一类的东西，真正的算是找到了，修改hibernate.connection.url的value为新的数据库地址 重新启动服务；
 
  /var/atlassian/application-data/confluence下confluence.cfg.xml文件：
+
+<p id ="useage">
+
+## 常用软件安装脚本
+
+```shell
+#!/bin/bash
+
+BASE_URL=192.168.11.235/centos
+BASE_DIR=/opt/software
+JDK_PACKAGE=jdk-8u221-linux-x64.tar.gz
+TOMCAT_PACKAGE=apache-tomcat-7.0.94.tar.gz
+MYSQL_PACKAGE=mysql-8.0.16-2.el7.x86_64.rpm-bundle.tar
+GCC_PACKAGE=gcc-8.3.0.tar.gz
+NGINX_PACKAGE=nginx-1.6.2.build.tar.gz
+#使用说明，用来提示输入参数
+usage() {
+	echo "如果需要安装 jdk，请执行  source ./install.sh jdk"
+	echo "如果需要安装 tomcat，请执行  ./install.sh tomcat"
+	echo "如果需要安装高版本的 gcc8，请执行  ./install.sh gcc8"
+	echo "如果需要安装 redis，请执行  ./install.sh redis 。注意：此软件是以 docker 方式安装。"
+	echo "如果需要安装 rabbitmq，请执行  ./install.sh rabbitmq 。注意：此软件是以 docker 方式安装。"
+	echo "如果需要安装 nginx，请执行  ./install.sh nginx"
+	echo "如果需要安装 sentinel，请执行  ./install.sh sentinel"
+	echo "如果需要安装 docker，请执行  ./install.sh docker"
+	echo "如果需要安装以上全部软件，请执行  ./install.sh all"
+	exit 1
+}
+
+if  [ -x "$(command -v expect)" ];then
+    echo 'expect 已经安装'
+else
+    echo 'expect  未安装,开始安装 expect 工具'
+    #安装expect
+    yum install -y expect
+fi
+
+if [ -x "$(command -v wget)" ];then
+    echo 'wget 已经安装'
+else
+    echo 'wget 未安装,开始安装 wget 工具'
+    #安装wget
+    yum install -y wget
+fi
+
+if [ ! -d "$BASE_DIR" ]; then
+	echo '创建目录。'$BASE_DIR
+    mkdir $BASE_DIR
+fi
+
+
+installJDK(){
+	if [ -x "$(command -v java)" ];then
+		echo '====================== JDK 已存在,JAVA_HOME='$JAVA_HOME' ======================'
+	else
+		echo '====================== 开始安装 JDK ======================'
+		wget -N $BASE_URL/$JDK_PACKAGE -P $BASE_DIR
+		tar -zxvf $BASE_DIR/$JDK_PACKAGE -C /usr/local
+		cat >> /etc/profile << EOF
+export JAVA_HOME=/usr/local/jdk1.8.0_221
+export PATH=\$PATH:\$JAVA_HOME/bin
+EOF
+		
+		echo '====================== JDK 已安装完成，JAVA_HOME='$JAVA_HOME' ======================'
+	fi
+	
+	
+}
+
+installNGINX(){
+	if [ -d "$BASE_DIR/nginx" ];then
+		echo '====================== NGINX 已存在 ======================'
+	else
+		echo '====================== 开始安装 NGINX ======================'
+		wget -N $BASE_URL/$NGINX_PACKAGE -P $BASE_DIR
+		tar -zxvf $BASE_DIR/$NGINX_PACKAGE -C /usr/local
+		/usr/local/nginx/sbin/nginx
+		pid = ps -ef|grep nginx | awk 'NR==1{ print $2 }'
+		if [ ! $? -eq 0 ];then
+		echo '====================== NGINX 已安装完成! ======================'
+		else
+		echo '====================== NGINX 安装失败!，请检查文件是否存在！ ======================'
+		fi
+		
+	fi
+}
+
+
+function installGCC(){
+	if [ -x "$(command -v gcc)" ];then
+		echo 'GCC 已存在' 
+	else
+		echo '====================== 安装 gcc ======================'
+		wget -N $BASE_URL/$GCC_PACKAGE -P $BASE_DIR
+		tar -zxvf $BASE_DIR/$GCC_PACKAGE -C /usr/local
+		cd /usr/local/gcc8.3.0build
+		rm -rf /usr/bin/gcc
+		rm -rf /usr/bin/g++
+		ln -s /usr/local/gcc8.3.0build/bin/gcc /usr/bin/gcc
+		ln -s /usr/local/gcc8.3.0build/bin/g++ /usr/bin/g++
+		cp /usr/local/gcc8.3.0build/lib64/libstdc++.so.6.0.25  /usr/lib64/libstdc++.so.6.0.25
+		rm -f /usr/lib64/libstdc++.so.6
+		ln /usr/lib64/libstdc++.so.6.0.25 /usr/lib64/libstdc++.so.6
+		echo '====================== GCC 安装完成 ======================'
+		echo '====================== GCC 版本 ======================'
+		gcc -v
+		strings /usr/lib64/libstdc++.so.6|grep GLIBC
+	fi
+}
+
+
+function installMYSQL(){
+
+	if [ -x "$(command -v mysql)" ];then
+		echo '======================mysql已存在======================' 
+	else
+		echo '======================安装mysql======================'
+		wget -N $BASE_URL/$MYSQL_PACKAGE -P $BASE_DIR
+		cd $BASE_DIR
+		tar -xvf $BASE_DIR/$MYSQL_PACKAGE 
+		echo '---------->>删除依赖'
+		rpm -qa|grep mariadb-libs | xargs rpm -e  --nodeps
+		#安装必要依赖
+		echo '---------->>安装依赖项'
+		yum install -y libaio net-tools perl numactl
+		echo '---------->>安装Mysql'
+		rpm -ivh mysql-community-common-8.0.16-2.el7.x86_64.rpm   
+		rpm -ivh mysql-community-libs-8.0.16-2.el7.x86_64.rpm   
+		rpm -ivh mysql-community-client-8.0.16-2.el7.x86_64.rpm  
+		rpm -ivh mysql-community-server-8.0.16-2.el7.x86_64.rpm 
+		echo '---------->>启动Mysql'
+		systemctl enable mysqld
+		systemctl start mysqld
+		
+		#pattern="^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$"
+		#while [[ "$newPassword" =~ $pattern ]]
+		#do
+		read -p '准备修改mysql密码，请输入新密码：新密码必须包含大小写字母、数字和特殊符号，并且长度不能少于8位。' newPassword
+		#done
+		# grep 'temporary password' /var/log/mysqld.log | sed -r 's/.*localhost: (.*)/\1/g'
+		cd ~
+		password=`grep 'temporary password' /var/log/mysqld.log|tail -n 1| awk '{print $NF}'`
+		echo '---------->>mysql 默认密码：'$password
+		./sql.sh $password $newPassword
+		echo '====================== 开启端口访问======================'
+		firewall-cmd --permanent --zone=public --add-port=3306/tcp
+		firewall-cmd --permanent --zone=public --add-port=3306/udp
+		firewall-cmd --reload
+		firewall-cmd --list-ports 
+		echo '====================== mysql 安装完成 Mysql密码为'$newPassword'======================'
+	fi
+}
+
+
+function installTomcat(){
+	echo '====================== 安装 tomcat ======================'
+	#pid=ps -ef | grep "tomcat" | grep -v grep | awk '{print $2}'
+	filename=${TOMCAT_PACKAGE%.tar.gz}
+	unzipUrl=/usr/local/$filename
+	if [ ! -d "$unzipUrl" ];then
+		wget -N $BASE_URL/$TOMCAT_PACKAGE -P $BASE_DIR
+		tar -zxvf $BASE_DIR/$TOMCAT_PACKAGE -C /usr/local/
+		#/usr/local/apache-tomcat-7.0.94/bin/startup.sh
+		echo '====================== tomcat安装完成 ======================'	
+	else
+		echo '====================== tomcat目录已存在 ======================'
+		echo '====================== tomcat目录: ======================'$unzipUrl
+	fi
+	
+}
+
+
+function installDocker(){
+
+	if ! [ -x "$(command -v docker)" ]; then
+	   echo '---------->>检测到 Docker 尚未安装。正在试图从网络安装...所需时间与你的网络环境有关'
+	   echo '---------->>安装一些必要的系统工具：'
+	   yum install -y yum-utils device-mapper-persistent-data lvm2
+	   echo '---------->>添加软件源信息：'
+   	   yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+ 	   yum makecache fast
+	   yum -y install docker-ce
+  	   systemctl start docker
+	   systemctl enable docker
+	  #echo 'It was detected that Docker was not installed. Attempting to install from the network... The time required is related to your network environment.'
+	  #echo '检测到Docker尚未安装。正在试图从网络安装...所需时间与你的网络环境有关'
+	  #curl -sSL https://get.daocloud.io/docker | sh
+	  #chkconfig docker on 
+	fi
+	  #if ! [ -x "$(command -v docker)" ]; then
+		#echo 'It was detected that Docker was not installed. Attempting to install from the network... The time required is related to your network environment.' 
+		#echo '检测到Docker尚未安装。正在试图从网络安装...所需时间与你的网络环境有关'
+		#curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+		#chkconfig docker on 
+	  #fi
+	if ! [ -x "$(command -v docker)" ]; then
+	  echo ' Docker 自动安装失败,建议你手动安装好 docker 环境后再启动本脚本' 
+	  exit 1
+	fi
+	echo '---------->> docker 安装成功！'
+}
+
+function installRedis(){
+	installDocker
+	if  [  "$(docker images  |grep redis)" ]; then
+	  echo "你已经安装过redis镜像"
+	  exit 1 
+	fi
+	echo '====================== 开始安装 redis 镜像 ======================'
+	docker pull redis
+	mkdir -p /docker/redis/conf /docker/redis/data
+	echo '------------->> 启动 redis 镜像'
+	docker run --restart=always --privileged=true -p 6379:6379 -v /docker/redis/data:/data -v /docker/redis/conf/redis.conf:/etc/redis/redis.conf --name redis -d redis redis-server --appendonly yes
+	if [ $? -eq 0 ]; then
+		echo '====================== redis 安装启动成功 ======================'
+		echo "====================== redis 配置文件：/docker/redis/ ======================"
+	else
+		echo "====================== redis 启动失败！详情参考 docker logs redis ======================"
+		exit 1
+	fi
+}
+function installSentinel(){
+	installDocker
+	if  [  "$(docker images  |grep sentinel)" ]; then
+	  echo "你已经安装过sentinel镜像"
+	  exit 1 
+	fi
+	echo '====================== 开始安装 sentinel 镜像 ======================'
+	docker pull bladex/sentinel-dashboard
+	echo '------------->> 启动 sentinel 镜像'
+	docker run --restart=always --name sentinel -d -p 8858:8858 -d bladex/sentinel-dashboard
+	if [ $? -eq 0 ]; then
+		echo '======================  sentinel 镜像启动成功！ ======================'
+	else
+		echo '======================  sentinel 启动失败！详情参考 docker logs sentinel ======================'
+		exit 1
+	fi
+}
+function installRabbitmq(){
+	installDocker
+	if  [  "$(docker images  |grep rabbitmq)" ]; then
+	  echo "你已经安装过rabbitmq镜像"
+	  exit 1 
+	fi
+	echo '====================== 开始安装 rabbitmq 镜像 ======================'
+	docker pull rabbitmq:3.7.16-management
+	echo '------------->> 启动 rabbitmq 镜像'
+	docker run --restart=always -d -p 5672:5672 -p 15672:15672 --name rabbitmq 3f92e6354d11
+	if [ $? -eq 0 ]; then
+		echo '======================  rabbitmq 镜像启动成功！ ======================'
+	else
+		echo '======================  rabbitmq 启动失败！详情参考 docker logs rabbitmq ======================'
+		exit 1
+	fi
+}
+
+function removeMysql(){
+	rpm -e mysql-community-server-8.0.16-2.el7.x86_64
+	rpm -e mysql-community-client-8.0.16-2.el7.x86_64 
+	rpm -e mysql-community-libs-8.0.16-2.el7.x86_64
+	rpm -e mysql-community-common-8.0.16-2.el7.x86_64
+	   
+	   
+	#groupdel mysql
+	userdel mysql
+
+	rm -rf /var/lib/mysql
+	rm -rf /var/lib/mysql/mysql
+	rm -rf /var/log/mysqld.log
+
+}
+#根据输入参数，选择执行对应方法，不输入则执行使用说明
+case "$1" in
+"jdk")
+	installJDK
+;;
+"tomcat")
+	installTomcat
+;;
+"mysql")
+	installMYSQL
+;;
+"gcc8")
+	installGCC
+;;
+"redis")
+	installRedis
+;;
+"rabbitmq")
+	installRabbitmq
+;;
+"nginx")
+	installNGINX
+;;
+"sentinel")
+	installSentinel
+;;
+"docker")
+	installDocker
+;;
+"removeMysql")
+	removeMysql
+;;
+"all")
+	installJDK
+	installTomcat
+	installMYSQL
+	installGCC
+	installRedis
+	installRabbitmq
+	installNGINX
+	installDocker
+;;
+*)
+	usage
+;;
+esac
+
+```
