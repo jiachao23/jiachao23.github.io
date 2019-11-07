@@ -1430,6 +1430,7 @@ sysctl net.ipv4.ip_forward
 
 //如果返回为net.ipv4.ip_forward = 1则表示成功了
 ```
+
 ## docker-compose
 ### 1、二进制安装
 ```shell
@@ -1462,7 +1463,7 @@ wget https://storage.googleapis.com/harbor-releases/release-1.6.0/harbor-offline
 tar xvzf harbor-offline-installer-v1.6.0.tgz -C /usr/local
 cd /usr/local/harbor
 vi harbor.cfg
-hostname = 192.168.186.129 //自行更改为服务器内部ip
+hostname = 192.168.11.239 //自行更改为服务器内部ip
 ./install.sh
 ```
 ### 2、若需要修改配置
@@ -1523,7 +1524,7 @@ service firewalld restart
 </pluginGroups>
 
 <server>
-  <id>192.168.186.129</id>
+  <id>192.168.11.239</id>
   <username>admin</username>
   <password>Harbor12345</password>
   <configuration>
@@ -1538,7 +1539,7 @@ service firewalld restart
 docker login 192.168.11.239
 Username: admin
 Password:
-Error response from daemon: Get https://192.168.186.129/v1/users/: dial tcp 192.168.186.129:443: getsockopt: connection refused
+Error response from daemon: Get https://192.168.11.239/v1/users/: dial tcp 192.168.11.239:443: getsockopt: connection refused
 ```
 这是因为docker1.3.2版本开始默认docker registry使用的是https，我们设置Harbor默认http方式，所以当执行用docker login、pull、push等命令操作非https的docker regsitry的时就会报错。
 解决办法：配置/etc/docker/daemon.json
@@ -1551,7 +1552,7 @@ vi /etc/docker/daemon.json
 //将其修改为：
 {
   "registry-mirrors": ["https://3dse7md.mirror.aliyuncs.com"],
-  "insecure-registries":["192.168.186.129"]
+  "insecure-registries":["192.168.11.239"]
 }
 
 //重启
