@@ -60,11 +60,11 @@ description: Linux下常用软件安装
 ## JDK
 
 
-### 下载地址
+### 1、下载地址
 
  http://software.jcohy.com/linux/jdk-8u221-linux-x64.tar.gz 
 
-### 常规安装
+### 2、常规安装
 
 1、用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **jdk-8u221-linux-x64.tar.gz**
 
@@ -98,11 +98,11 @@ java -version
 ## Tomcat
 
 
-### 下载地址
+### 1、下载地址
 
  http://software.jcohy.com/linux/apache-tomcat-7.0.94.tar.gz
 
-### 常规安装
+### 2、常规安装
 
 1、用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **apache-tomcat-7.0.94.tar.gz**
 
@@ -137,11 +137,11 @@ netstat -anpt | grep 2465
 ## mysql
 
 
-### 下载地址
+### 1、下载地址
 
 https://pan.baidu.com/s/1iP5QDXSYHQ5q61cBFQvs-A
 
-### 常规安装
+### 2、常规安装
 
 1. 用FileZilla或其他工具将下载好的安装包上传至Linux服务器。放置在 **/opt/software/** 目录下。这里使用的是 **mysql-8.0.16-2.el7.x86_64.rpm-bundle.tar**
 
@@ -285,13 +285,13 @@ flush privileges;
 ## Redis
 
 
-### 下载地址
+### 1、下载地址
 
 https://pan.baidu.com/s/1iP5QDXSYHQ5q61cBFQvs-A
 
 https://github.com/MSOpenTech/redis/releases
 
-### 常规安装
+### 2、常规安装
 
 1、[到官网](https://github.com/MSOpenTech/redis/releases)下载redis安装包
 
@@ -331,7 +331,7 @@ redis> get foo
 "bar"
 ```
 
-### docker安装
+### 3、docker安装
 
 1、使用docker安装[redis](http://www.runoob.com/docker/docker-install-redis.html)
 
@@ -344,13 +344,13 @@ docker run --restart=always --privileged=true -p 6379:6379 -v /docker/redis/data
 
 ## nginx
 
-### 下载地址：
+### 1、下载地址：
 
 http://nginx.org/en/linux_packages.html#RHEL-CentOS
 
 http://software.jcohy.com/linux/nginx-1.6.2.tar.gz 
 
-### 常规安装
+### 2、常规安装
 
 1、安装编译工具及库文件
 
@@ -450,16 +450,43 @@ src/core/ngx_murmurhash.c: In function ‘ngx_murmur_hash2’:
 再重新make
 ```
 
-### docker安装
+### 3、docker安装
 
-1、使用docker安装[nginx](http://www.runoob.com/docker/docker-install-nginx.html)
+1、建立Nginx文件目录
 
 ```shell
+mkdir -p /docker/nginx
+mkdir -p /docker/nginx/html
+mkdir -p /docker/nginx/conf.d
+mkdir -p /docker/nginx/log
+```
+2、拉取镜像
+```shell
 docker pull nginx
-
-mkdir -p /docker/nginx/www /docker/nginx/logs /docker/nginx/conf
-
-docker run -d -p 80:80 --name nginx -v /docker/nginx/www:/usr/share/nginx/html -v /docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /docker/nginx/logs:/var/log/nginx nginx
+```
+3、建立一个标准镜像
+```shell
+docker run -p 80:80 --name nginx -d nginx
+```
+4、复制nginx.conf文件到宿主机nginx，执行下面命令前，先确保路径是否是1步骤的目录下
+```shell
+docker cp nginx:/etc/nginx/nginx.conf /docker/nginx/nginx.conf
+```
+5、利用同样的办法把default.conf复制出来
+```shell
+docker cp nginx:/etc/nginx/conf.d/default.conf /docker/nginx/conf.d/default.conf
+```
+6、删除这个标准镜像
+```shell
+docker rm -f nginx
+```
+7、nginx映射多个端口，并挂载服务器配置文件
+```shell
+docker run --name nginx -itd -p 80:80 -p 8800:8800 \
+-v /docker/nginx/html:/usr/share/nginx/html \
+-v /docker/nginx/log:/var/log/nginx \
+-v /docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+-v /docker/nginx/conf.d:/etc/nginx/conf.d --privileged=true -d nginx;
 ```
 
 ### 使用编译后软件包安装
@@ -475,9 +502,9 @@ tar -zxvf nginx-1.6.2.build.tar.gz  -C /usr/local
 ## RabbitMq
 
 
-### 下载地址
+### 1、下载地址
 
-### 常规安装
+### 3、常规安装
 
 1、由于RabbitMQ依赖Erlang， 所以需要先安装Erlang
 
@@ -542,8 +569,8 @@ rabbitmqctl set_permissions -p / username ".*" ".*" ".*"
 rabbitmqctl list_user_permissions username
 
   ```
-  
-### docker安装
+
+### 3、docker安装
 
 	1、在docker官网查找docker镜像，https://hub.docker.com/
 	
@@ -564,11 +591,11 @@ git --version
 
 ## gitlab
 
-### 下载地址 
+### 1、下载地址 
 
 https://about.gitlab.com/install/#centos-7
 
-### 常规安装
+### 2、常规安装
 
 1、安装依赖
 
@@ -636,7 +663,7 @@ sudo gitlab-ctl reconfigure 配置执行
 ```
 
 
-### Docker安装中文版
+### 3、Docker安装中文版
 
 https://docs.gitlab.com/omnibus/docker/
 
@@ -735,13 +762,13 @@ Notify.test_email('jia_chao23@126.com', 'Message Subject', 'Message Body').deliv
 
 ## node
 
-### 下载地址
+### 1、下载地址
 
 http://software.jcohy.com/linux/node-v10.16.0.tar.gz 
 
 http://nodejs.org/dist/v10.16.0/node-v10.16.0.tar.gz 
 
-### 常规安装
+### 2、常规安装
 
 1、下载并解压
 
@@ -845,7 +872,7 @@ rm -rf libstdc++.so.6
 ln -s libstdc++.so.6.0.21 libstdc++.so.6
 ```
 
-### 2、淘宝镜像安装
+### 3、淘宝镜像安装
 
 ```shell
 .cd  /usr/loacl/node/  
@@ -1333,7 +1360,6 @@ mysql设置问题：
 第三步、进入confluence.home配置的文件夹，打开这个文件夹看到 有一个confluence.cfg.xml文件，打开这个文件，发现配置的数据库连接池一类的东西，真正的算是找到了，修改hibernate.connection.url的value为新的数据库地址 重新启动服务；
 
  /var/atlassian/application-data/confluence下confluence.cfg.xml文件：
-
 
 ## docker
 
