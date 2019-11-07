@@ -29,6 +29,9 @@ description: Linux下常用软件安装
 > * [安装高版本gcc](#安装高版本gcc)
 > * [LDAP](#LDAP)
 > * [Confluence](#Confluence)
+> * [docker](#docker)
+> * [docker-compose](#docker-compose)
+> * [Harbor](#Harbor)
 > * [常用软件安装脚本](#useage)
 
 
@@ -50,7 +53,9 @@ description: Linux下常用软件安装
 | docker   | release                                  |
 | jenkins  | release                                  |
 | gcc      | gcc-8.3.0.tar.gz                         |
-
+| docker      |                          |
+| docker-compose      | 1.24.1                         |
+| Harbor      | 1.6.0                         |
 
 ## JDK
 
@@ -128,7 +133,6 @@ netstat -anpt | grep 2465
 6、通过浏览器访问tomcat
 
  <http://192.168.11.231:8080/>
-
 
 ## mysql
 
@@ -538,6 +542,7 @@ rabbitmqctl set_permissions -p / username ".*" ".*" ".*"
 rabbitmqctl list_user_permissions username
 
   ```
+  
 ### docker安装
 
 	1、在docker官网查找docker镜像，https://hub.docker.com/
@@ -727,7 +732,6 @@ gitlab-rake gitlab:incoming_email:check
 gitlab-rails console
 Notify.test_email('jia_chao23@126.com', 'Message Subject', 'Message Body').deliver_now
 ```
-
 
 ## node
 
@@ -1329,6 +1333,255 @@ mysql设置问题：
 第三步、进入confluence.home配置的文件夹，打开这个文件夹看到 有一个confluence.cfg.xml文件，打开这个文件，发现配置的数据库连接池一类的东西，真正的算是找到了，修改hibernate.connection.url的value为新的数据库地址 重新启动服务；
 
  /var/atlassian/application-data/confluence下confluence.cfg.xml文件：
+
+
+## docker
+
+### 1、系统要求
+Docker 运行在 CentOS 7.X 之上 （不支持内核在 3.8 以下的老版本）
+通过以下命令查看您的 CentOS 内核
+```shell
+uname -r
+```
+### 2、移除非官方软件包
+```shell
+ yum remove docker
+```
+### 3、卸载旧版本
+```shell
+yum remove docker \
+                  docker-common \
+                  docker-selinux \
+                  docker-engine
+```
+### 4、设置 Yum 源
+Docker 有多种安装方式，例如 Yum 安装、PRM 包安装、Shell安装等。以下以 Yum 安装方式进行, Docker 分 Docker EE 和 Docker CE 两种版本（EE：企业版，收费的；CE：社区版，不收费）。
+
+* 1、安装 yum-utils , 这样就能使用 yum-config-manager 工具设置 Yum 源。
+```shell
+yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+```
+* 2、执行以下命令，添加 Docker 的 Yum 源。
+```shell
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+* 3、【可选】启用测试仓库。测试仓库包含在 docker.repo 文件中，但默认情况下禁用的。
+```shell
+ yum-config-manager --enable docker-ce-edge
+```
+```shell
+ yum-config-manager --enable docker-ce-test
+```
+* 4、如想要禁用测试仓库，可执行以下命令：
+ ```shell
+ yum-config-manager --disable docker-ce-edge
+ ```
+### 5、安装docker
+```shell
+yum makecache fast
+//安装最新版本的 Docker
+yum install docker-ce
+//在生产系统中，可能需要安装指定版本的 Docker ，而并不总是安装最新的版本。执行以下命令，即可列出可用的 Docker 版本
+yum list docker-ce --showduplicates | sort -r
+//列出 Docker 版本后，可使用以下命令安装指定版本的 Docker 。
+yum install
+//例如：
+yum -y install docker-ce-17.09.0.ce
+```
+### 6、启动docker
+```shell
+systemctl start docker
+```
+### 7、执行以下命令，验证安装是否正确
+```shell
+docker run hello-world
+```
+### 8、查看 Docker 版本
+```shell
+docker version
+```
+### 9、卸载docker
+```shell
+//卸载 Docker 软件包
+yum remove docker-ce
+//如需删除镜像、容器、卷以及自定义的配置文件，可执行以下命令
+sudo rm -rf /var/lib/docker
+```
+### 10、设置docker镜像加速
+国内访问 Docker Hub 的速度很不稳定，有时甚至出现连接不上的情况。为 Docker 配置镜像加速器，从而解决这个问题。目前国内很多云服务商都提供了镜像加速的服务。常用的镜像加速器有：
+阿里云加速器、DaoCloud加速器等。
+以阿里云加速器为例：
+1、注册阿里云账号，即可在阿里云控制台（https://cr.console.aliyun.com/#/accelerator）
+2、按照提示说明，即可配置镜像加速器。
+
+### 11、ipv4转向配置
+若启动docker的时候报错：WARNING IPv4 forwarding is disabled. Networking will not work
+解决方案：
+```shell
+vi /etc/sysctl.conf
+//添加配置
+net.ipv4.ip_forward=1
+//重启
+systemctl restart network
+//查看是否成功
+sysctl net.ipv4.ip_forward
+
+//如果返回为net.ipv4.ip_forward = 1则表示成功了
+```
+## docker-compose
+### 1、二进制安装
+```shell
+//指定版本安装：
+$ sudo curl -L https://get.daocloud.io/docker/compose/releases/download/1.23.1/\
+docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+
+//对二进制文件赋可执行权限
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+### 2、yum源安装
+```shell
+yum -y install docker-compose
+```
+
+### 3、测试安装是否成功
+```shell
+$ docker-compose --version
+docker-compose version 1.23.1, build 1719ceb
+```
+
+## Harbor
+注意：Harbor的所有服务组件都是在Docker中部署的，所以官方安装使用Docker-compose快速部署，所以我们需要安装Docker、Docker-compose。由于Harbor是基于Docker Registry V2版本，
+所以就要求Docker版本不小于1.10.0，Docker-compose版本不小于1.6.0。
+### 1、安装Harbor
+```shell
+mkdir /opt/software
+cd /opt/software
+wget https://storage.googleapis.com/harbor-releases/release-1.6.0/harbor-offline-installer-v1.6.0.tgz
+tar xvzf harbor-offline-installer-v1.6.0.tgz -C /usr/local
+cd /usr/local/harbor
+vi harbor.cfg
+hostname = 192.168.186.129 //自行更改为服务器内部ip
+./install.sh
+```
+### 2、若需要修改配置
+```shell
+docker-compose down -v
+vim harbor.cfg
+prepare
+docker-compose up -d
+```
+### 3、重启
+```shell
+docker-compose stop
+docker-compose start
+```
+### 4、登录Harbor
+地址：http://192.168.11.239
+用户名：admin
+密码：Harbor12345
+
+### 5、测试推送
+```shell
+//1.admin登录
+$ docker login 192.168.11.239
+Username: admin
+Password:
+Login Succeeded
+
+//2.给镜像打tag
+$ docker tag nginx 192.168.11.239/aix/nginx:latest
+$ docker images
+
+//3.push到仓库
+$ docker push 192.168.11.239/aix/nginx
+
+```
+
+### 6、开放2375端口
+注意：在外网开放有安全风险，只推荐在内网对外开放
+vi /lib/systemd/system/docker.service
+在[Service]节点下方增加
+```shell
+ExecStart=
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
+```
+```shell
+systemctl daemon-reload
+systemctl restart docker
+docker-compose stop
+docker-compose start
+firewall-cmd --add-port=2375/tcp --permanent
+service firewalld restart
+```
+
+### 7、maven配置
+```pom
+<pluginGroups>
+  <pluginGroup>com.spotify</pluginGroup>  
+</pluginGroups>
+
+<server>
+  <id>192.168.186.129</id>
+  <username>admin</username>
+  <password>Harbor12345</password>
+  <configuration>
+    <email>smallchill@163.com</email>
+  </configuration>
+</server>
+```
+
+### 8、FAQ
+1.配置并启动Harbor之后，本地执行登录操作，报错：
+```shell
+docker login 192.168.11.239
+Username: admin
+Password:
+Error response from daemon: Get https://192.168.186.129/v1/users/: dial tcp 192.168.186.129:443: getsockopt: connection refused
+```
+这是因为docker1.3.2版本开始默认docker registry使用的是https，我们设置Harbor默认http方式，所以当执行用docker login、pull、push等命令操作非https的docker regsitry的时就会报错。
+解决办法：配置/etc/docker/daemon.json
+```shell
+vi /etc/docker/daemon.json 
+
+{
+  "registry-mirrors": ["https://3dse7md.mirror.aliyuncs.com"]
+}
+//将其修改为：
+{
+  "registry-mirrors": ["https://3dse7md.mirror.aliyuncs.com"],
+  "insecure-registries":["192.168.186.129"]
+}
+
+//重启
+systemctl daemon-reload && systemctl restart docker
+```
+2.使用非admin账户执行docker pull命令时，报错
+```shell
+$ docker pull 192.168.11.239/aix/nginx:latest
+Error response from daemon: repository 192.168.11.239/aix/nginx not found: does not exist or no pull access
+```
+这是原因可能有，一是Harbor仓库上aix/nginx确实不存在，二是项目未设置公开的时候，该账户未执行docker login 192.168.11.239 登录操作，三是该账户对192.168.11.239/aix项目没有权限，需要在该项目下增加aix成员，并选择角色。
+
+3.如果需要修改Harbor的配置文件harbor.cfg，因为Harbor是基于docker-compose服务编排的，我们可以使用docker-compose命令重启Harbor。不修改配置文件，重启Harbor命令：docker-compose start | stop | restart
+```shell
+//停止Harbor
+$ docker-compose down -v
+Stopping nginx ... done
+Stopping harbor-jobservice ... done
+......
+Removing harbor-log ... done
+Removing network harbor_harbor
+
+//启动Harbor
+$ docker-compose up -d
+Creating network "harbor_harbor" with the default driver
+Creating harbor-log ... 
+......
+Creating nginx
+Creating harbor-jobservice ... done
+```
 
 ## 常用软件安装脚本
 
