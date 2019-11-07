@@ -1455,6 +1455,7 @@ docker-compose version 1.23.1, build 1719ceb
 ## Harbor
 注意：Harbor的所有服务组件都是在Docker中部署的，所以官方安装使用Docker-compose快速部署，所以我们需要安装Docker、Docker-compose。由于Harbor是基于Docker Registry V2版本，
 所以就要求Docker版本不小于1.10.0，Docker-compose版本不小于1.6.0。
+
 ### 1、安装Harbor
 ```shell
 mkdir /opt/software
@@ -1479,11 +1480,14 @@ docker-compose stop
 docker-compose start
 ```
 ### 4、登录Harbor
-地址：http://192.168.11.239
-用户名：admin
-密码：Harbor12345
+> 地址：http://192.168.11.239
+> 用户名：admin
+> 密码：Harbor12345
 
 ### 5、测试推送
+
+> 注意，此处需要结合第4步，登录到控制台后创建 aix 项目。
+
 ```shell
 //1.admin登录
 $ docker login 192.168.11.239
@@ -1502,9 +1506,10 @@ $ docker push 192.168.11.239/aix/nginx
 
 ### 6、开放2375端口
 注意：在外网开放有安全风险，只推荐在内网对外开放
-vi /lib/systemd/system/docker.service
-在[Service]节点下方增加
+
 ```shell
+vi /lib/systemd/system/docker.service
+//在[Service]节点下方增加
 ExecStart=
 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock
 ```
@@ -1542,6 +1547,7 @@ Password:
 Error response from daemon: Get https://192.168.11.239/v1/users/: dial tcp 192.168.11.239:443: getsockopt: connection refused
 ```
 这是因为docker1.3.2版本开始默认docker registry使用的是https，我们设置Harbor默认http方式，所以当执行用docker login、pull、push等命令操作非https的docker regsitry的时就会报错。
+
 解决办法：配置/etc/docker/daemon.json
 ```shell
 vi /etc/docker/daemon.json 
